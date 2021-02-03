@@ -22,7 +22,6 @@ apps:
       - network-bind
       - raw-usb
       - removable-media
-      - serial-port
 
 parts:
   rkdeveloptool:
