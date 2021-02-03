@@ -1,0 +1,39 @@
+name: rkdeveloptool
+base: core20
+version: '0.1'
+summary: rockchip rk3399 bootloader flash tool
+description: |
+  Flash tool to write bootloaders to rk3399 boards, please connect the
+  raw-usb interface with
+
+      snap connect rkdeveloptool:raw-usb
+  
+  to allow proper access to the attached boards.
+
+grade: stable
+confinement: strict
+
+apps:
+  rkdeveloptool:
+    command: usr/bin/rkdeveloptool
+    plugs:
+      - home
+      - network
+      - network-bind
+      - raw-usb
+      - removable-media
+      - serial-port
+
+parts:
+  rkdeveloptool:
+    source: https://github.com/rockchip-linux/rkdeveloptool.git
+    plugin: autotools
+    build-packages:
+      - pkg-config
+      - libudev-dev
+      - libusb-1.0-0
+      - libusb-1.0-0-dev
+    autotools-configure-parameters:
+      - --prefix=/usr
+    stage-packages:
+      - libusb-1.0-0
